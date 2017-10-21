@@ -41,6 +41,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         list_spinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(list_spinner);
 
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            public void uncaughtException(Thread paramThread, Throwable paramThrowable) {
+                Log.e("Error" + Thread.currentThread().getStackTrace()[2], paramThrowable.getLocalizedMessage());
+            }
+        });
+
+        if (getSupportLoaderManager().getLoader(0) != null) {
+            getSupportLoaderManager().initLoader(0, null, this);
+        }
+
     }
 
     @Override
